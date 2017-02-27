@@ -1,0 +1,122 @@
+<section id="tabbar" class="panel" style="position: relative;">
+    <header class="panel-heading custom-tab turquoise-tab">
+        <ul class="nav nav-tabs">
+
+            <li v-for="tab in tabData"  @click="clickTab(tab)"  :class="tab.menu_key == selectTab ? 'active' : ''">
+                <a data-toggle="tab" :href="'#'+tab.tabKey">
+                    <i class="fa fa-user"></i>
+                    {{tab.menu_title}}
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div v-for="thisTab in tabData" :id="thisTab.tabKey" :class="thisTab.menu_key == selectTab ? 'tab-pane active' : 'tab-pane'">
+                <!--body wrapper start-->
+                    <div class="row" v-if="thisTab.type == 'component'">
+                        <as-component :componentname="thisTab.component" :mapper="thisTab.mapperJson" :id="thisTab.dataId"></as-component>
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var tabbar = new Vue({
+        el:'#tabbar',
+        data:{
+            tabDataArray:[],
+            tabData:[],
+            selectTab:leftmenu.thisMenu.menu_key,
+            component:'',
+            mapperJson:{},
+        },
+        mounted: function() {
+            var _self = this;
+            _self.tabData.push(JSON.stringify(leftmenu.menuData[0]));
+        },
+        methods:{
+            addTab:function (thisTab) {
+                var _self = this;
+                if($.inArray(JSON.stringify(thisTab), _self.tabDataArray) == -1){
+                    _self.tabDataArray.push(JSON.stringify(thisTab));
+                    _self.tabData.push(thisTab);
+                }
+                _self.selectTab = thisTab.menu_key;
+                _self.component = thisTab.component;
+            },
+            clickTab:function (thisTab) {
+                var _self = this;
+                leftmenu.thisMenu = thisTab;
+                _self.selectTab = thisTab.menu_key;
+            }
+        }
+    });
+    var asComponent = Vue.component('as-component', {
+        // 选项
+        template:'<components :is="componentname" :id="id" :mapper="mapper"></components>',
+        props:['id','componentname','mapper'],
+        data:function () {
+            return {
+                "a":1
+            }
+        },
+        components:{
+            "asTable":asTable
+        },
+        mounted:function () {
+            console.log(123);
+        },
+        methods:{
+
+        }
+    });
+
+
+    var doPost = function(apiName,postData,callback){
+        Vue.http.post(apiName, postData).then(function ($data) {
+            if($data['data']['code'] == 200){
+               callback($data['data']);
+            }else{
+                //错误提示
+                alert($data['data']['message']);
+            }
+        }, function () {
+
+        });
+    }
+    Vue.filter( 'education' , function(value) {
+        switch (value){
+            case 1:
+                return '本科';
+            case 2:
+                return '硕士';
+            case 3:
+                return '博士及以上';
+            case 4:
+                return '大专';
+            case 5:
+                return '高中';
+            default:
+                return '其他';
+        }
+    });
+    Vue.filter( 'sex' , function(value) {
+        switch (value){
+            case 1:
+                return '男';
+            case 2:
+                return '女';
+            case 3:
+                return '保密';
+            default:
+                return '未知';
+        }
+    });
+    Vue.filter( 'time' , function(value) {
+        return new Date(parseInt(value) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+    });
+</script>

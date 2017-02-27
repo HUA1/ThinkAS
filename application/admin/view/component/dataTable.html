@@ -1,0 +1,81 @@
+<template id="as-table">
+    <div class="col-sm-12">
+        <section id="table" class="panel">
+            <header class="panel-heading">
+
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail2">昵称</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="昵称">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputPassword2">手机号</label>
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="手机号">
+                    </div>
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                    <span class="pull-right">
+                            <button v-for="handle in mapper.handle" :class="'btn ' + handle.class" type="button" @click="clickHandle(handle.component,handle.mapper)"><i :class="'fa ' + handle.icon"></i> {{handle.title}}</button>
+                    </span>
+                </div>
+
+            </header>
+            <div class="panel-body" style="height: 500px;overflow: scroll;">
+                <table class="table  table-hover general-table">
+                    <thead>
+                    <tr>
+                        <th v-for="mapper in mapperJson['titleList']">{{mapper.title}}</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in tableData">
+                        <td v-for="data in mapperJson.titleList">
+                            <a href="#" v-if="data.type == 'time'">{{item[data.key] | time}}</a>
+                            <a href="#" v-else>{{item[data.key]}}</a>
+                        </td>
+                        <td>
+                            <as-component v-for="button in mapperJson.button" :componentname="button.component" :id="item[button.parameter]" :mapper="button"></as-component>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</template>
+<script>
+    var asTable = Vue.component('as-table', {
+        // 选项
+        template:'#as-table',
+        props:['mapper'],
+        data:function () {
+            return {
+                "mapperJson":'',
+                "tableData":''
+            }
+        },
+        components:{
+            "asButtonGroup":asButtonGroup
+        },
+        mounted:function () {
+            var _self = this;
+            _self.mapperJson = _self.$options.propsData.mapper;
+            //获取数据
+            this.$http.post(_self.mapperJson.apiName).then(function ($data) {
+                if($data['body']['code'] == 200){
+                    _self.tableData = $data['body']['data'];
+                }else{
+                    //错误提示
+                }
+            }, function () {
+
+            });
+        },
+        methods:{
+            clickHandle:function (component,mapper) {
+
+                layer.addLayer(component,mapper);
+            }
+        }
+    });
+</script>

@@ -1,0 +1,48 @@
+<template id="as-button-group">
+    <div class="btn-group">
+        <button class="btn btn-success" @click="clickButton(mapperJson.handle)" type="button">{{mapperJson.title}}</button>
+        <button data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul role="menu" class="dropdown-menu">
+            <li v-for="menu in mapperJson.dropdown"><a @click="clickButton(mapperJson.handle)" href="#">{{menu.title}}</a></li>
+        </ul>
+    </div>
+</template>
+<script>
+    var asButtonGroup = Vue.component('as-button-group', {
+        template:'#as-button-group',
+        props:['id','mapper'],
+        data:function () {
+            return {
+                "mapperJson":'',
+                "userData":''
+            }
+        },
+        mounted:function () {
+            var _self = this;
+            _self.mapperJson = _self.$options.propsData.mapper;
+        },
+        methods:{
+            clickButton:function () {
+                var _self = this;
+                var thisTab = {
+                    "menu_key":"userDetail_"+_self.$options.propsData.id,
+                    "menu_title": "用户详情",
+                    "icon": null,
+                    "type": "component",
+                    "mapper": "admin|userList",
+                    "component": _self.mapperJson.handle
+                };
+                thisTab['dataId']=_self.$options.propsData.id;
+                console.log(JSON.stringify(_self.$options.propsData.id));
+                if(thisTab.type == 'component'){
+                    doPost('/mapper',{'model':thisTab.mapper},function ($data) {
+                        tabbar.addTab(thisTab);
+                    });
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,80 @@
+<!-- left side start-->
+<div class="left-side sticky-left-side">
+    <!--logo and iconic logo start-->
+    <div class="logo">
+        <a href="index.html"><img src="/static/images/logo.png" alt="" height="40px;"></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="index.html"><img src="/static/images/logo_icon.png" alt=""></a>
+    </div>
+    <!--logo and iconic logo end-->
+
+    <div class="left-side-inner">
+
+        <!-- visible to small devices only -->
+        <div class="visible-xs hidden-sm hidden-md hidden-lg">
+            <div class="media logged-user">
+                <img alt="" src="images/photos/user-avatar.png" class="media-object">
+                <div class="media-body">
+                    <h4><a href="#">John Doe</a></h4>
+                    <span>"Hello There..."</span>
+                </div>
+            </div>
+
+            <h5 class="left-nav-title">Account Information</h5>
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+            </ul>
+        </div>
+
+        <!--sidebar nav start-->
+        <ul id="leftmenu" class="nav nav-pills nav-stacked custom-nav">
+            <li v-for="menu in menuData" class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>{{menu.menu_title}}</span></a>
+                <ul class="sub-menu-list">
+                    <li v-for="childMenu in menu.menu" :class="childMenu.menu_key == thisMenu.menu_key ? 'active' : ''"><a href="javascript:void(0)" @click="openPage(childMenu)">{{childMenu.menu_title}}</a></li>
+                </ul>
+            </li>
+            <!--<li><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login Page</span></a></li>-->
+        </ul>
+        <!--sidebar nav end-->
+    </div>
+    <script>
+        var leftmenu = new Vue({
+            el: '#leftmenu',
+            data: {
+                menuData: {$leftMenu},
+                thisMenu: ''
+            },
+            mounted:function () {
+                var _salf = this;
+                _salf.thisMenu = _salf.menuData[0]
+            },
+            methods:{
+                setMenu:function () {
+
+                },
+                openPage:function (thisTab) {
+                    var _self = this;
+                    if(thisTab.type == 'component'){
+                        this.$http.post('/mapper', {'model':thisTab.mapper}).then(function ($data) {
+                            if($data['data']['code'] == 200){
+                                thisTab['mapperJson'] = $data['data']['data'];
+                                _self.thisMenu = thisTab;
+                                tabbar.addTab(thisTab);
+
+                            }else{
+                                //错误提示
+                            }
+                        }, function () {
+
+                        });
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+<!-- left side end-->

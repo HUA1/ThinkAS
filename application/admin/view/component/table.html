@@ -1,0 +1,93 @@
+<div class="col-sm-12">
+    <section id="table" class="panel">
+        <header class="panel-heading">
+            [title]
+            [mapperJson]
+            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+        </header>
+        <div class="panel-body">
+            <table class="table  table-hover general-table">
+                <thead>
+                <tr>
+                    <th v-for="mapper in mapperJson['titleList']">{{mapper.title}}</th>
+
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                        </a>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button">用户组 <span class="caret"></span></button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-info" type="button">详情</button>
+                        <button class="btn btn-danger" type="button">禁封</button>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<script>
+    var table = new Vue({
+        el:'#table',
+        data:{
+            mapperJson:''
+        },
+        methods:{
+            getMapperJson:function () {
+                //当前模块
+                console.log(leftmenu.thisMenu.mapper);
+                this.$http.post('/mapper', {'model':'admin|userList'}).then(function ($data) {
+                    if($data['data']['code'] == 200){
+                        console.log($data['data']['data']);
+                        $data['data']['data'];
+                    }else{
+                        //错误提示
+                    }
+                }, function () {
+
+                });
+            }
+        }
+    });
+    table.getMapperJson();
+</script>

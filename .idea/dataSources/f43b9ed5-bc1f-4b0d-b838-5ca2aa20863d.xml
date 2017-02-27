@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - think_app_service@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="think_app_service">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="chungold-edusoho"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="performance_schema"/>
+    <schema id="6" name="shangdoc"/>
+    <table id="7" parent="1" name="as_admin_menu"/>
+    <table id="8" parent="1" name="as_group"/>
+    <table id="9" parent="1" name="as_mapper"/>
+    <table id="10" parent="1" name="as_power"/>
+    <table id="11" parent="1" name="as_role"/>
+    <table id="12" parent="1" name="as_user"/>
+    <table id="13" parent="1" name="as_user_group"/>
+    <table id="14" parent="1" name="as_user_profile"/>
+    <table id="15" parent="1" name="as_data_area"/>
+    <column id="16" parent="7" name="menu_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="17" parent="7" name="menu_key">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="18" parent="7" name="menu_title">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="19" parent="7" name="menu_route">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="20" parent="7" name="icon">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="21" parent="7" name="parent_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="22" parent="7" name="sort">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="23" parent="7" name="type">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="24" parent="7" name="type_value">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="25" parent="7" name="mapper">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="26" parent="7" name="component">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="27" parent="7" name="PRIMARY">
+      <columns>menu_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="28" parent="8" name="group_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="29" parent="8" name="group_name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="30" parent="8" name="group_desc">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="31" parent="8" name="parent_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="32" parent="8" name="role_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="33" parent="8" name="PRIMARY">
+      <columns>group_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="34" parent="9" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="35" parent="9" name="model">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="36" parent="9" name="json">
+      <data-type>text|0</data-type>
+    </column>
+    <key id="37" parent="9" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="38" parent="10" name="power_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="39" parent="10" name="power_name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="40" parent="10" name="power_desc">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="41" parent="10" name="PRIMARY">
+      <columns>power_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="42" parent="11" name="role_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="43" parent="11" name="role_name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="44" parent="11" name="role_desc">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="45" parent="11" name="PRIMARY">
+      <columns>role_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="46" parent="12" name="uid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="47" parent="12" name="phone">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="48" parent="12" name="password">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="49" parent="12" name="nickname">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="50" parent="12" name="avatar">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="51" parent="12" name="register_time">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="52" parent="12" name="last_login_time">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="53" parent="12" name="salt">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="54" parent="12" name="group_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="55" parent="12" name="PRIMARY">
+      <columns>uid</columns>
+      <primary>1</primary>
+    </key>
+    <column id="56" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="57" parent="13" name="group_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="58" parent="13" name="uid">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="59" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="60" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="61" parent="14" name="uid">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="62" parent="14" name="sex">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="63" parent="14" name="age">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="64" parent="14" name="company">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="65" parent="14" name="country">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="66" parent="14" name="province">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="67" parent="14" name="city">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="68" parent="14" name="town">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="69" parent="14" name="school">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="70" parent="14" name="education">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="71" parent="14" name="work_time">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="72" parent="14" name="job">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="73" parent="14" name="introduce">
+      <data-type>text|0</data-type>
+    </column>
+    <key id="74" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="75" parent="15" name="area_id">
+      <comment>id</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="76" parent="15" name="title">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="77" parent="15" name="english_title">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="78" parent="15" name="pid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="79" parent="15" name="sort">
+      <comment>排序</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="80" parent="15" name="time_difference">
+      <data-type>float(11,2)|0</data-type>
+    </column>
+    <key id="81" parent="15" name="PRIMARY">
+      <columns>area_id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,12 +1,29 @@
-ThinkPHP 5.0
-===============
+## ThinkAS 
+#### restful API 风格的服务端框架(带数据可视化后台)
+ThinkAS(Think Application Service)是基于PHP7开发专为移动互联网APP定制的服务端框架，拥有完整易于拓展的基于RBAC的用户权限控制系统，让互联网创业开发人员只专注于业务逻辑的开发，而ThinkAS也会提供大量的功能模块如
 
-[![Total Downloads](https://poser.pugx.org/topthink/think/downloads)](https://packagist.org/packages/topthink/think)
-[![Latest Stable Version](https://poser.pugx.org/topthink/think/v/stable)](https://packagist.org/packages/topthink/think)
-[![Latest Unstable Version](https://poser.pugx.org/topthink/think/v/unstable)](https://packagist.org/packages/topthink/think)
-[![License](https://poser.pugx.org/topthink/think/license)](https://packagist.org/packages/topthink/think)
+#### 将提供的功能模块
+1. 用户体系
+2. 文档系统
+3. 会员体系
+4. 支付功能(基于Ping++支持微信,支付宝,百度钱包等)
+5. 电商功能
+6. O2O功能
+7. 贴吧功能
+8. 微博功能
+9. 即时通讯(基于融云)
+10. 云附件功能(基于七牛)
 
-ThinkPHP5在保持快速开发和大道至简的核心理念不变的同时，PHP版本要求提升到5.4，对已有的CBD模式做了更深的强化，优化核心，减少依赖，基于全新的架构思想和命名空间实现，是ThinkPHP突破原有框架思路的颠覆之作，其主要特性包括：
+#### 严格的加密方式
+1. 网络层 支持Https,杜绝了一切中间数据泄露的风险
+2. 应用层 采用和支付宝相同的2048位RSA不对称(公钥私钥)加密
+3. 逻辑层 采用服务端客户端同时加密生成Access-Token的机制,拿到token(以上两种加密方式的存在,token泄露只有服务器运维人员泄露一种情况了)仍然只能在1分钟内的时间进行操作。
+
+#### 数据可视化
+同时ThinkAS采用Vue2.0(前端MVVM框架)开发配套的数据可视化管理后台,ThinkAS的管理后台为SPA(单页面应用)多窗口机制，最大限度的发挥了数据可视化后台的操作体验。
+
+#### 技术体系
+核心框架在ThinkPHP基础上进行二次开发，对已有的CBD模式做了更深的强化，优化核心，减少依赖，基于全新的架构思想和命名空间实现，是ThinkPHP突破原有框架思路的颠覆之作，其主要特性包括：
 
  + 基于命名空间和众多PHP新特性
  + 核心功能组件化
@@ -26,9 +43,7 @@ ThinkPHP5在保持快速开发和大道至简的核心理念不变的同时，PH
  + 分布式环境支持
  + 更多的社交类库
 
-> ThinkPHP5的运行环境要求PHP5.4以上。
-
-详细开发文档参考 [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
+> ThinkAS的运行环境要求PHP5.4以上,推荐使用PHP7。
 
 ## 目录结构
 
@@ -37,6 +52,7 @@ ThinkPHP5在保持快速开发和大道至简的核心理念不变的同时，PH
 ~~~
 www  WEB部署目录（或者子目录）
 ├─application           应用目录
+│  ├─admin              数据可视化管理后台
 │  ├─common             公共模块目录（可以更改）
 │  ├─module_name        模块目录
 │  │  ├─config.php      模块配置文件
@@ -88,43 +104,31 @@ www  WEB部署目录（或者子目录）
 
 ## 命名规范
 
-`ThinkPHP5`遵循PSR-2命名规范和PSR-4自动加载规范，并且注意如下规范：
+`ThinkAS`遵循PSR-2命名规范和PSR-4自动加载规范，并且注意如下规范：
 
-### 目录和文件
+#### 目录和文件
 
 *   目录不强制规范，驼峰和小写+下划线模式均支持；
 *   类库、函数文件统一以`.php`为后缀；
 *   类的文件名均以命名空间定义，并且命名空间的路径和类库文件所在路径一致；
 *   类名和类文件名保持一致，统一采用驼峰法命名（首字母大写）；
 
-### 函数和类、属性命名
+#### 函数和类、属性命名
 *   类的命名采用驼峰法，并且首字母大写，例如 `User`、`UserType`，默认不需要添加后缀，例如`UserController`应该直接命名为`User`；
 *   函数的命名使用小写字母和下划线（小写字母开头）的方式，例如 `get_client_ip`；
 *   方法的命名使用驼峰法，并且首字母小写，例如 `getUserName`；
 *   属性的命名使用驼峰法，并且首字母小写，例如 `tableName`、`instance`；
 *   以双下划线“__”打头的函数或方法作为魔法方法，例如 `__call` 和 `__autoload`；
 
-### 常量和配置
+#### 常量和配置
 *   常量以大写字母和下划线命名，例如 `APP_PATH`和 `THINK_PATH`；
 *   配置参数以小写字母和下划线命名，例如 `url_route_on` 和`url_convert`；
 
-### 数据表和字段
-*   数据表和字段采用小写加下划线方式命名，并注意字段名不要以下划线开头，例如 `think_user` 表和 `user_name`字段，不建议使用驼峰和中文作为数据表字段命名。
-
-## 参与开发
-请参阅 [ThinkPHP5 核心框架包](https://github.com/top-think/framework)。
+#### 数据表和字段
+*   数据表和字段采用小写加下划线方式命名，并注意字段名不要以下划线开头，例如 `as_user` 表和 `user_name`字段，不建议使用驼峰和中文作为数据表字段命名。
 
 ## 版权信息
 
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
+ThinkAS遵循Apache2开源协议发布，并提供免费使用。
 
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
-版权所有Copyright © 2006-2016 by ThinkPHP (http://thinkphp.cn)
-
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
-# thinkAS
